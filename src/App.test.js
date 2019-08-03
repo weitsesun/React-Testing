@@ -89,4 +89,39 @@ describe('\n - testing decremet button', () => {
     const counterDisplay = findByTestAttr(wrapper, 'counter-display');
     expect(counterDisplay.text()).toContain(0);
   });
+  test('should render error message', () => {
+    const counter = 0;
+    const wrapper = setup(null, {counter});
+    const button = findByTestAttr(wrapper, 'decrement-button');
+    button.simulate('click');
+    wrapper.update();
+    const errorMessage = findByTestAttr(wrapper, 'error-message');
+    expect(errorMessage.length).toBe(1);
+  });
+  test('should prevent error on increment button', () => {
+    const counter = 0;
+    const wrapper = setup(null, {counter});
+
+    //click decrement button once, the counter should maintain 0
+    const deButton = findByTestAttr(wrapper, 'decrement-button');
+    deButton.simulate('click');
+
+    //click the increment button, the counter value should be 1
+    const inButton = findByTestAttr(wrapper, 'increment-button');
+    inButton.simulate('click');
+
+    wrapper.update();
+    const counterDisplay = findByTestAttr(wrapper, 'counter-display');
+    expect(counterDisplay.text()).toContain(1);
+  });
+
+  test('should hide error message while counter is greater than zero', () => {
+    const counter = 0;
+    const wrapper = setup(null, {counter});
+    const button = findByTestAttr(wrapper, 'increment-button');
+    button.simulate('click');
+    wrapper.update();
+    const errorMessage = findByTestAttr(wrapper, 'error-message');
+    expect(errorMessage.length).toBe(0);
+  });
 })
