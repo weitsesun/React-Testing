@@ -124,4 +124,14 @@ describe('\n - testing decremet button', () => {
     const errorMessage = findByTestAttr(wrapper, 'error-message');
     expect(errorMessage.length).toBe(0);
   });
+  test('should keep increasing after 2 clicks', () => {
+    const counter = 0;
+    const wrapper = setup(null, {counter});
+    const button = findByTestAttr(wrapper, 'increment-button');
+    button.simulate('click');
+    button.simulate('click');
+    wrapper.update();
+    const counterDisplay = findByTestAttr(wrapper, 'counter-display');
+    expect(counterDisplay.text()).toContain(2);
+  });
 })
