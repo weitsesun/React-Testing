@@ -38,6 +38,9 @@ class App extends React.Component {
             counter: result
           })}
           }>Decremet Button</button>
+          <button data-test="reset-button" onClick={() => {
+            this.setState({counter : 0})
+          }}>Reset</button>
       </div>
     )
   }
