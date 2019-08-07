@@ -134,4 +134,9 @@ describe('\n - testing decremet button', () => {
     const counterDisplay = findByTestAttr(wrapper, 'counter-display');
     expect(counterDisplay.text()).toContain(2);
   });
+  test('should render the reset button', () => {
+    const wrapper = setup();
+    const button = findByTestAttr(wrapper, 'reset-button');
+    expect(button.length).toBe(1);
+  })
 })
